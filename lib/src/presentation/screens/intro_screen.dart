@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/core/constants/app_colors.dart';
 import 'package:weather_app/src/core/constants/app_images.dart';
 import 'package:weather_app/src/presentation/screens/home_screen.dart';
 
@@ -14,7 +13,10 @@ class IntroScreen extends StatelessWidget {
         width: double.infinity,
         child: DecoratedBox(
           decoration: const BoxDecoration(
-            color: AppColors.backColor,
+            image: DecorationImage(
+              image: AssetImage(AppImages.backgroundImage),
+              fit: BoxFit.cover,
+            )
           ),
           child: Center(
             child: Column(
