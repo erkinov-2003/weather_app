@@ -14,7 +14,10 @@ class IntroScreen extends StatelessWidget {
         width: double.infinity,
         child: DecoratedBox(
           decoration: const BoxDecoration(
-            color: AppColors.backColor,
+            image: DecorationImage(
+              image: AssetImage(AppImages.backgroundImage),
+              fit: BoxFit.cover,
+            )
           ),
           child: Center(
             child: Column(
