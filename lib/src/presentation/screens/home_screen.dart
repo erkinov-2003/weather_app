@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/core/constants/app_colors.dart';
+import 'package:glass/glass.dart';
 import 'package:weather_app/src/core/constants/app_images.dart';
-import 'package:weather_app/src/presentation/widget/home_item.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../core/config/api_config.dart';
+import '../../model/weather_model.dart';
+import '../../service/network_service.dart';
+import '../widget/custom_card.dart';
+
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
@@ -182,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 7,
                               itemBuilder: (context, index) {
-                                return const Padding(
+                                return  const Padding(
                                   padding: EdgeInsets.only(left: 15, top: 20),
                                   child: CustomCard(
                                     image: AppImages.cloud,
