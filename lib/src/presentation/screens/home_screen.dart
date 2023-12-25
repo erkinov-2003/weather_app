@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glass/glass.dart';
-import 'package:weather_app/src/core/config/api_config.dart';
+import 'package:weather_app/src/core/constants/app_colors.dart';
 import 'package:weather_app/src/core/constants/app_images.dart';
-import 'package:weather_app/src/model/weather_model.dart';
-import 'package:weather_app/src/service/network_service.dart';
-import '../widget/custom_card.dart';
+import 'package:weather_app/src/presentation/widget/home_item.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
