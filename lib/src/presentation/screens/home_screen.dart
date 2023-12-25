@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:glass/glass.dart';
+import 'package:lottie/lottie.dart';
+import 'package:weather/weather.dart';
 import 'package:weather_app/src/core/constants/app_images.dart';
-
-import '../../core/config/api_config.dart';
-import '../../model/weather_model.dart';
-import '../../service/network_service.dart';
-import '../widget/custom_card.dart';
+import 'package:weather_app/src/presentation/widget/custom_botton.dart';
+import 'package:weather_app/src/service/network_service.dart';
+import 'package:intl/intl.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -16,24 +15,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _service = WeatherService(apiKey: AppConfig.apiKey);
-  WeatherModel? weatherModel;
-
-   getAllWeatherData() async {
-    String cityName = await _service.locationPermission();
-    try {
-      final weather = await _service.getAllWeather(cityName);
-      setState(() {
-        weatherModel = weather;
-      });
-    } catch (e) {
-      throw Exception("error getAll data $e");
-    }
-  }
+  final WeatherFactory weatherFactory =
+      WeatherFactory("01371badeacb7733260dd4fa74dbf7ff");
+  Weather? weather;
 
   @override
   void initState() {
-    getAllWeatherData();
+    weatherFactory
+        .currentWeatherByCityName("Tashkent, Uzbekistan")
+        .then((value) {
+      setState(() {
+        weather = value;
+      });
+    });
     super.initState();
   }
 
@@ -55,21 +49,21 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               children: [
                 Align(
-                  alignment: const Alignment(0, -0.8),
+                  alignment: const Alignment(0, -0.4),
                   child: Text(
-                    weatherModel?.cityName ?? "Loading city...",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    weather?.areaName ?? "",
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "AbhayaLibre",
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins",
                         ),
                   ),
                 ),
                 Align(
-                  alignment: const Alignment(0, -0.7),
+                  alignment: const Alignment(-0.8, -0.8),
                   child: Text(
-                    "${weatherModel?.temperature.round() ?? "Loading temperature"}",
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                     "${weather?.temperature?.celsius?.toStringAsFixed(0)}° C",
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontFamily: "Poppins",
@@ -77,132 +71,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Align(
-                  alignment: const Alignment(0, -0.5),
-                  child: Text(
-                    "Mostly Clear",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "AbhayaLibre",
-                        ),
+                  alignment: const Alignment(0.9, -0.9),
+                  child: Lottie.asset(
+                    WeatherService.animationWeather(weather?.weatherMain),
+                    height: 150,
                   ),
                 ),
                 Align(
-                  alignment: const Alignment(0, -0.4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "H:24°",
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "AbhayaLibre",
-                                ),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        "L:18°",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "AbhayaLibre",
-                            ),
-                      ),
-                    ],
+                  alignment: const Alignment(0, -0.3),
+                  child: Text(
+                    DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                    style:
+                    Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "AbhayaLibre",
+                    ),
                   ),
                 ),
                 const Align(
                   alignment: Alignment(0, 0.3),
                   child: Image(
                     image: AssetImage(AppImages.house),
-                    height: 350,
+                    height: 300,
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: 320,
-                    width: double.infinity,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            const Color.fromARGB(255, 44, 45, 88)
-                                .withOpacity(0.5),
-                            const Color.fromARGB(255, 74, 42, 138)
-                                .withOpacity(0.5)
-                          ],
-                        ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(35),
-                          topRight: Radius.circular(35),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Hourly Forecast",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                Text(
-                                  "Hourly Forecast",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const SizedBox(
-                            height: 2,
-                            width: double.infinity,
-                            child: ColoredBox(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 170,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 7,
-                              itemBuilder: (context, index) {
-                                return  const Padding(
-                                  padding: EdgeInsets.only(left: 15, top: 20),
-                                  child: CustomCard(
-                                    image: AppImages.cloud,
-                                    gradius: "29°",
-                                    hour: "12 AM",
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ).asGlass(
-                    tintColor: Colors.transparent,
+                  child: CustomBottomItem(
+                    image: "",
+                    cloud: "${weather?.cloudiness ?? ""}",
+                    humidity: "${weather?.humidity ?? ""}",
+                    pressure: "${weather?.pressure ?? ""}",
+                    snow: "${weather?.snowLastHour ?? "0.0"}",
+                    sunset: "${weather?.sunset?.minute}",
+                    wind: "${weather?.windDegree}",
                   ),
                 ),
               ],

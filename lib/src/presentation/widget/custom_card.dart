@@ -6,47 +6,38 @@ class CustomCard extends StatelessWidget {
   const CustomCard({
     super.key,
     required this.image,
-    required this.hour,
-    required this.gradius,
+    required this.data,
   });
   final String image;
-  final String hour;
-  final String gradius;
+  final String data;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
-      width: 70,
+      height: 95,
+      width: 95,
       child: DecoratedBox(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           color: const Color.fromARGB(255, 66, 60, 105),
           border: Border.all(color: Colors.white, width: 0.4),
           borderRadius: const BorderRadius.all(
-            Radius.circular(35),
+            Radius.circular(15),
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              hour,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
             Image(
               image: AssetImage(image),
-              height: 30,
+              height: 40,
             ),
             Text(
-              gradius,
+              data,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
-            ),
+            )
           ],
         ),
       ),

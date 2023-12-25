@@ -1,3 +1,3 @@
 class AppConfig {
-  static String apiKey = "6506626530776eba14cf5d2cd33d4438";
+  static String apiKey = "01371badeacb7733260dd4fa74dbf7ff";
 }
