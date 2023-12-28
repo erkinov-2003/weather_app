@@ -6,7 +6,6 @@ import 'package:weather_app/src/presentation/widget/custom_botton.dart';
 import 'package:weather_app/src/service/network_service.dart';
 import 'package:intl/intl.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -33,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
         height: double.infinity,
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 40),
+            padding: EdgeInsets.only(top: size.height * 0.040),
             child: Stack(
               children: [
                 Align(
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Align(
                   alignment: const Alignment(-0.8, -0.8),
                   child: Text(
-                     "${weather?.temperature?.celsius?.toStringAsFixed(0)}° C",
+                    "${weather?.temperature?.celsius?.toStringAsFixed(0)}° C",
                     style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
@@ -81,19 +81,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: const Alignment(0, -0.3),
                   child: Text(
                     DateFormat.yMMMMEEEEd().format(DateTime.now()),
-                    style:
-                    Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "AbhayaLibre",
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "AbhayaLibre",
+                        ),
                   ),
                 ),
-                const Align(
-                  alignment: Alignment(0, 0.3),
+                Align(
+                  alignment: const Alignment(0, 0.3),
                   child: Image(
-                    image: AssetImage(AppImages.house),
-                    height: 300,
+                    image: const AssetImage(AppImages.house),
+                    height: size.height * 0.415,
                   ),
                 ),
                 Align(

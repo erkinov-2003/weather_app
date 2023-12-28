@@ -7,6 +7,7 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
         height: double.infinity,
@@ -34,7 +35,7 @@ class IntroScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       fontFamily: "Poppins"),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: size.height * 0.020),
                 Text(
                   "ForeCasts",
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
@@ -47,7 +48,7 @@ class IntroScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFDDB130),
                     visualDensity: VisualDensity.comfortable,
-                    fixedSize: const Size(350, 60),
+                    fixedSize:  Size(size.width * 0.892, size.height * 0.071),
                   ),
                   onPressed: () => navigator(context),
                   child: Text(

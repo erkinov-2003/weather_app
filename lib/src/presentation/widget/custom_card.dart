@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
@@ -13,9 +11,10 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 95,
-      width: 95,
+      height: size.height * 0.112,
+      width: size.width * 0.242,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 66, 60, 105),

@@ -5,11 +5,12 @@ class CustomBottomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 70,
+      height: size.height * 0.083,
       width: double.infinity,
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromARGB(255,45, 49, 91),
         ),
         child: Column(
@@ -43,7 +44,7 @@ class CustomBottomAppBar extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.020),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

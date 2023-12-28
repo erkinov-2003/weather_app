@@ -25,8 +25,9 @@ class CustomBottomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 320,
+      height: size.height * 0.380,
       width: double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -67,7 +68,7 @@ class CustomBottomItem extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.010),
             const SizedBox(
               height: 2,
               width: double.infinity,
@@ -75,7 +76,7 @@ class CustomBottomItem extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.020),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
