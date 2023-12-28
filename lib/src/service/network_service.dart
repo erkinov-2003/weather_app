@@ -20,8 +20,10 @@ class WeatherService {
         return "assets/lottie/snow.json";
       case "clear":
         return "assets/lottie/sun.json";
+      case "night":
+      return "assets/lottie/night.json";
       default:
-        return "assets/lottie/sun.json";
+        return "assets/lottie/cloud.json";
     }
   }
 }

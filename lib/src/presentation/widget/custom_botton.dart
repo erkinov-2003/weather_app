@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/src/core/constants/app_icons.dart';
 import 'package:weather_app/src/presentation/widget/custom_card.dart';
 
@@ -50,14 +51,14 @@ class CustomBottomItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Hourly Forecast",
+                    DateFormat.MMMMEEEEd().format(DateTime.now()),
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                         ),
                   ),
                   Text(
-                    "Hourly Forecast",
+                    DateFormat().add_jms().format(DateTime.now()),
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
